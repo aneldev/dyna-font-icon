@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
+		module.exports = factory(require("react"), require("dyna-loops"));
 	else if(typeof define === 'function' && define.amd)
-		define("dyna-ts-react-module-boilerplate", ["react"], factory);
+		define("dyna-font-icon", ["react", "dyna-loops"], factory);
 	else if(typeof exports === 'object')
-		exports["dyna-ts-react-module-boilerplate"] = factory(require("react"));
+		exports["dyna-font-icon"] = factory(require("react"), require("dyna-loops"));
 	else
-		root["dyna-ts-react-module-boilerplate"] = factory(root["react"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_3__) {
+		root["dyna-font-icon"] = factory(root["react"], root["dyna-loops"]);
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -87,11 +87,9 @@ module.exports = __webpack_require__(1);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Button_1 = __webpack_require__(2);
-exports.DynaFontIcon = Button_1.Button;
-exports.EStyle = Button_1.EStyle;
-exports.EColor = Button_1.EColor;
-exports.ESize = Button_1.ESize;
+var DynaFontIcon_1 = __webpack_require__(2);
+exports.DynaFontIcon = DynaFontIcon_1.DynaFontIcon;
+exports.EFontType = DynaFontIcon_1.EFontType;
 
 
 /***/ }),
@@ -110,61 +108,89 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(3);
-__webpack_require__(4);
-var EStyle;
-(function (EStyle) {
-    EStyle["ROUNDED"] = "ROUNDED";
-})(EStyle = exports.EStyle || (exports.EStyle = {}));
-var EColor;
-(function (EColor) {
-    EColor["WHITE_BLACK"] = "WHITE_BLACK";
-    EColor["WHITE_RED"] = "WHITE_RED";
-    EColor["BLACK_WHITE"] = "BLACK_WHITE";
-    EColor["TRANSPARENT_WHITE"] = "TRANSPARENT_WHITE";
-})(EColor = exports.EColor || (exports.EColor = {}));
-var ESize;
-(function (ESize) {
-    ESize["SMALL"] = "SMALL";
-    ESize["MEDIUM"] = "MEDIUM";
-    ESize["LARGE"] = "LARGE";
-    ESize["XLARGE"] = "XLARGE";
-})(ESize = exports.ESize || (exports.ESize = {}));
-var Button = /** @class */ (function (_super) {
-    __extends(Button, _super);
-    function Button() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.baseClassName = "my-button";
-        _this.className = function (subClassName, active) {
-            if (subClassName === void 0) { subClassName = ""; }
-            if (active === void 0) { active = true; }
-            return active ? "" + _this.baseClassName + subClassName : "";
+var dyna_loops_1 = __webpack_require__(4);
+__webpack_require__(5);
+var EFontType;
+(function (EFontType) {
+    EFontType["FONT_AWESOME_V4"] = "FONT_AWESOME_V4";
+})(EFontType = exports.EFontType || (exports.EFontType = {}));
+var DynaFontIcon = /** @class */ (function (_super) {
+    __extends(DynaFontIcon, _super);
+    function DynaFontIcon(props) {
+        var _this = _super.call(this, props) || this;
+        _this.className = "dyna-font-icon";
+        _this.state = {
+            fontSize: null,
         };
         return _this;
     }
-    Button.prototype.render = function () {
-        var _a = this.props, children = _a.children, style = _a.style, color = _a.color, size = _a.size, href = _a.href, onClick = _a.onClick;
+    DynaFontIcon.prototype.componentWillReceiveProps = function (nextProps) {
+        var _this = this;
+        if (nextProps.className !== this.props.className ||
+            nextProps.style !== this.props.style) {
+            setTimeout(function () {
+                _this.setFontSize();
+            }, 1); // give it a tick, the dom is not changed
+        }
+    };
+    DynaFontIcon.prototype.componentDidMount = function () {
+        this.setFontSize();
+    };
+    DynaFontIcon.prototype.setFontSize = function () {
+        var computedStyle = getComputedStyle(this.refs.container);
+        var width = dyna_loops_1.round(parseFloat(computedStyle.width), 2);
+        var height = dyna_loops_1.round(parseFloat(computedStyle.height), 2);
+        var fontSize = width > height ? height : width;
+        this.setState({ fontSize: fontSize + "px" });
+    };
+    DynaFontIcon.prototype.renderFA4 = function () {
+        var fontClassName = this.props.fontClassName;
+        var fontSize = this.state.fontSize;
+        var style = {
+            fontSize: fontSize,
+        };
+        return (React.createElement("i", { className: fontClassName, style: style, "aria-hidden": "true" }));
+    };
+    ;
+    DynaFontIcon.prototype.renderIcon = function () {
+        var fontType = this.props.fontType;
+        switch (fontType) {
+            case EFontType.FONT_AWESOME_V4:
+                return this.renderFA4();
+        }
+    };
+    DynaFontIcon.prototype.render = function () {
+        var userClassName = this.props.className;
         var className = [
-            this.className(),
-            this.className("--style-" + style),
-            this.className("--color-" + color),
-            this.className("--size-" + size),
+            this.className,
+            userClassName,
         ].join(' ').trim();
-        return (React.createElement("a", { className: className, href: href, onClick: onClick },
-            React.createElement("button", null, children)));
+        var style = __assign({}, (this.props.style || {}), { fontSize: "0" });
+        var props = __assign({}, this.props);
+        delete props.className;
+        delete props.fontType;
+        delete props.fontClassName;
+        delete props.style;
+        return (React.createElement("div", __assign({ className: className }, props, { ref: "container", style: style }), this.renderIcon()));
     };
-    Button.defaultProps = {
-        children: null,
-        style: EStyle.ROUNDED,
-        color: EColor.WHITE_BLACK,
-        size: ESize.MEDIUM,
-        href: null,
-        onClick: function () { return undefined; },
+    DynaFontIcon.defaultProps = {
+        className: "",
+        fontType: EFontType.FONT_AWESOME_V4,
+        fontClassName: null,
     };
-    return Button;
+    return DynaFontIcon;
 }(React.Component));
-exports.DynaFontIcon = Button;
+exports.DynaFontIcon = DynaFontIcon;
 
 
 /***/ }),
@@ -175,12 +201,18 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(5);
+var content = __webpack_require__(6);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -188,14 +220,14 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(7)(content, options);
+var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./Button.less", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./Button.less");
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./DynaFontIcon.less", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./DynaFontIcon.less");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -205,21 +237,21 @@ if(false) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(false);
+exports = module.exports = __webpack_require__(7)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".my-button {\n  outline: none;\n}\n.my-button--style-ROUNDED {\n  font-size: 0;\n}\n.my-button--style-ROUNDED button {\n  outline: none;\n  border-style: solid;\n  cursor: pointer;\n  -webkit-transition: background-color 200ms ease-out;\n  transition: background-color 200ms ease-out;\n}\n.my-button--style-ROUNDED.my-button--size-SMALL button {\n  padding: 2px 8px;\n  font-size: 8px;\n  line-height: 10px;\n  border-width: 1px;\n  border-radius: 8px;\n  font-weight: bold;\n}\n.my-button--style-ROUNDED.my-button--size-SMALL button:active {\n  position: relative;\n  top: 1px;\n  left: 1px;\n}\n.my-button--style-ROUNDED.my-button--size-MEDIUM button {\n  padding: 4px 16px;\n  font-size: 14px;\n  line-height: 22px;\n  border-width: 1px;\n  border-radius: 16px;\n  font-weight: bold;\n}\n.my-button--style-ROUNDED.my-button--size-MEDIUM button:active {\n  position: relative;\n  top: 1px;\n  left: 1px;\n}\n.my-button--style-ROUNDED.my-button--size-LARGE button {\n  padding: 8px 32px;\n  font-size: 26px;\n  line-height: 46px;\n  border-width: 1px;\n  border-radius: 32px;\n  font-weight: bold;\n}\n.my-button--style-ROUNDED.my-button--size-LARGE button:active {\n  position: relative;\n  top: 2px;\n  left: 2px;\n}\n.my-button--style-ROUNDED.my-button--size-XLARGE button {\n  padding: 16px 64px;\n  font-size: 40px;\n  line-height: 92px;\n  border-width: 2px;\n  border-radius: 64px;\n  font-weight: bold;\n}\n.my-button--style-ROUNDED.my-button--size-XLARGE button:active {\n  position: relative;\n  top: 2px;\n  left: 2px;\n}\n.my-button--color-WHITE_BLACK button {\n  border-color: black;\n  background: white;\n  color: black;\n}\n.my-button--color-WHITE_BLACK button:hover {\n  background-color: #e6e6e6;\n}\n.my-button--color-WHITE_BLACK button:active {\n  background-color: #d1d1d1;\n}\n.my-button--color-WHITE_RED button {\n  border-color: red;\n  background: white;\n  color: red;\n}\n.my-button--color-WHITE_RED button:hover {\n  background-color: #e6e6e6;\n}\n.my-button--color-WHITE_RED button:active {\n  background-color: #d1d1d1;\n}\n.my-button--color-BLACK_WHITE button {\n  border-color: black;\n  background: black;\n  color: white;\n}\n.my-button--color-BLACK_WHITE button:hover {\n  background-color: #333333;\n}\n.my-button--color-BLACK_WHITE button:active {\n  background-color: #525252;\n}\n.my-button--color-TRANSPARENT_WHITE button {\n  border-color: white;\n  background: transparent;\n  color: white;\n}\n.my-button--color-TRANSPARENT_WHITE button:hover {\n  border-color: #e6e6e6;\n  color: #e6e6e6;\n}\n.my-button--color-TRANSPARENT_WHITE button:active {\n  border-color: #d1d1d1;\n  color: #d1d1d1;\n}\n", ""]);
+exports.push([module.i, ".dyna-font-icon {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -301,7 +333,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -347,7 +379,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(8);
+var	fixUrls = __webpack_require__(9);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -660,7 +692,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
