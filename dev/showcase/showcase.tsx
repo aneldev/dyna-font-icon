@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {DynaFontIcon} from "../../src";
+import {DynaFontIcon, EFontType} from "../../src";
 
 import {faIcon, IShowcase} from "dyna-showcase";
 import {Logo} from "../logo";

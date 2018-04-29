@@ -26,14 +26,41 @@ _or_
 
 # Supported Web Fonts 
 
-Currently only [Font Awesome v4](https://fontawesome.com/v4.7.0/icons/).
+## Font Awesome 4
 
-In future other also web fonts will be supported with the same logic.
-
-# Load the web fonts css
-
-You should load the icons from their cdn with this code.
+Load the fonts
 
 ```
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossOrigin="anonymous" />
 ```
+
+[Select Font Awesome v4](https://fontawesome.com/v4.7.0/icons/).
+
+## Font Awesome 5
+
+Load the fonts
+
+```
+<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+```
+
+[Select Font Awesome v5](https://fontawesome.com/icons?d=gallery&m=free).
+
+
+## Other fonts
+
+In future other also web fonts will be supported with the same logic.
+
+Forks are welcome.
+
+
+# Change log
+
+# v1
+
+Support Font Awesome v4
+
+# v2
+
+Support Font Awesome v4 & v5
+
