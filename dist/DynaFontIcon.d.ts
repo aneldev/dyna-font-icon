@@ -6,7 +6,7 @@ export interface IDynaFontIconProps extends React.HTMLAttributes<HTMLDivElement>
     fontClassName: string;
 }
 export declare enum EFontType {
-    FONT_AWESOME_V4 = "FONT_AWESOME_V4",
+    FONT_AWESOME = "FONT_AWESOME",
 }
 export interface IDynaFontIconState {
     fontSize: string;
@@ -21,7 +21,7 @@ export declare class DynaFontIcon extends React.Component<IDynaFontIconProps, ID
     componentWillReceiveProps(nextProps: IDynaFontIconProps): void;
     componentDidMount(): void;
     setFontSize(): void;
-    private renderFA4();
+    private renderFA();
     private renderIcon();
     render(): JSX.Element;
 }

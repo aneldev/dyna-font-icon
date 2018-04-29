@@ -122,7 +122,7 @@ var dyna_loops_1 = __webpack_require__(4);
 __webpack_require__(5);
 var EFontType;
 (function (EFontType) {
-    EFontType["FONT_AWESOME_V4"] = "FONT_AWESOME_V4";
+    EFontType["FONT_AWESOME"] = "FONT_AWESOME";
 })(EFontType = exports.EFontType || (exports.EFontType = {}));
 var DynaFontIcon = /** @class */ (function (_super) {
     __extends(DynaFontIcon, _super);
@@ -154,20 +154,20 @@ var DynaFontIcon = /** @class */ (function (_super) {
         var fontSize = width > height ? height : width;
         this.setState({ fontSize: fontSize + "px" });
     };
-    DynaFontIcon.prototype.renderFA4 = function () {
+    DynaFontIcon.prototype.renderFA = function () {
         var fontClassName = this.props.fontClassName;
         var fontSize = this.state.fontSize;
         var style = {
             fontSize: fontSize,
         };
-        return (React.createElement("i", { className: fontClassName, style: style, "aria-hidden": "true" }));
+        return (React.createElement("span", { className: fontClassName, style: style, "aria-hidden": "true" }));
     };
     ;
     DynaFontIcon.prototype.renderIcon = function () {
         var fontType = this.props.fontType;
         switch (fontType) {
-            case EFontType.FONT_AWESOME_V4:
-                return this.renderFA4();
+            case EFontType.FONT_AWESOME:
+                return this.renderFA();
         }
     };
     DynaFontIcon.prototype.render = function () {
@@ -186,7 +186,7 @@ var DynaFontIcon = /** @class */ (function (_super) {
     };
     DynaFontIcon.defaultProps = {
         className: "",
-        fontType: EFontType.FONT_AWESOME_V4,
+        fontType: EFontType.FONT_AWESOME,
         fontClassName: null,
     };
     return DynaFontIcon;
