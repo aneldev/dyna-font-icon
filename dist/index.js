@@ -137,6 +137,7 @@ var DynaFontIcon = /** @class */ (function (_super) {
     DynaFontIcon.prototype.componentWillReceiveProps = function (nextProps) {
         var _this = this;
         if (nextProps.className !== this.props.className ||
+            nextProps.fontClassName !== this.props.fontClassName ||
             nextProps.style !== this.props.style) {
             setTimeout(function () {
                 _this.setFontSize();
