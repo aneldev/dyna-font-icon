@@ -41,6 +41,7 @@ export class DynaFontIcon extends React.Component<IDynaFontIconProps, IDynaFontI
 	public componentWillReceiveProps(nextProps: IDynaFontIconProps): void {
 		if (
 			nextProps.className !== this.props.className ||
+			nextProps.fontClassName !== this.props.fontClassName ||
 			nextProps.style !== this.props.style
 		) {
 			setTimeout(()=>{
