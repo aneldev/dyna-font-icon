@@ -1,6 +1,6 @@
 {
   "name": "dyna-font-icon",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Set width and height of font icons though css classes or js",
   "repository": {
     "type": "git",
