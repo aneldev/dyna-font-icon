@@ -55,6 +55,7 @@ export class DynaFontIcon extends React.Component<IDynaFontIconProps, IDynaFontI
 	}
 
 	public setFontSize(): void {
+		if (!this.refs.container) return;
 		const computedStyle: CSSStyleDeclaration = getComputedStyle(this.refs.container);
 		const width = round(parseFloat(computedStyle.width), 2);
 		const height = round(parseFloat(computedStyle.height), 2);
