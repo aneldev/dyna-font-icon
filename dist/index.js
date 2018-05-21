@@ -148,6 +148,8 @@ var DynaFontIcon = /** @class */ (function (_super) {
         this.setFontSize();
     };
     DynaFontIcon.prototype.setFontSize = function () {
+        if (!this.refs.container)
+            return;
         var computedStyle = getComputedStyle(this.refs.container);
         var width = dyna_loops_1.round(parseFloat(computedStyle.width), 2);
         var height = dyna_loops_1.round(parseFloat(computedStyle.height), 2);
